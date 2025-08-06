@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Employee Directory</h2>
+<form method="get">
+    <label>Filter by Department:</label>
+    <select name="department" onchange="this.form.submit()">
+        <option value="">All</option>
+        {% for dept in employee.department._meta.model.objects.all %}
+            <option value="{{ dept.id }}">{{ dept.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+<ul>
+    {% for employee in employees %}
+        <li><a href="{% url 'employee-detail' employee.id %}">{{ employee.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
