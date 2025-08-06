@@ -5,6 +5,8 @@ services:
     plan: free
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn core.wsgi:application"
+    autoDeploy: true
+    preDeployCommand: "python manage.py migrate"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: core.settings
